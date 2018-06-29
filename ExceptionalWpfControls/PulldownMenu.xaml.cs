@@ -18,11 +18,43 @@ namespace ExceptionalWpfControls
     /// <summary>
     /// Interaction logic for PulldownMenu.xaml
     /// </summary>
-    public partial class PulldownMenu : UserControl
+    public partial class PulldownMenu : ComboBox
     {
         public PulldownMenu()
         {
             InitializeComponent();
+
+            this.MouseMove += PulldownMenu_MouseMove;
+            this.MouseUp += PulldownMenu_MouseUp;
+            this.MouseLeave += PulldownMenu_MouseLeave;
+        }
+
+        ~PulldownMenu()
+        {
+            this.MouseMove -= PulldownMenu_MouseMove;
+            this.MouseUp -= PulldownMenu_MouseUp;
+            this.MouseLeave -= PulldownMenu_MouseLeave;
+        }
+
+        protected override void OnDropDownOpened(EventArgs e)
+        {
+            base.OnDropDownOpened(e);
+        }
+
+        private void PulldownMenu_MouseMove(object sender, MouseEventArgs e)
+        {
+            double yDiff = e.GetPosition(this).Y - this.Height;
+            this.MaxDropDownHeight = Math.Max(0.0, yDiff);
+        }
+
+        private void PulldownMenu_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.IsDropDownOpen = false;
+        }
+
+        private void PulldownMenu_MouseLeave(object sender, MouseEventArgs e)
+        {
+            this.IsDropDownOpen = false;
         }
     }
 }
