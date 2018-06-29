@@ -93,5 +93,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExceptionalWpfControls\ExceptionalWpfControls.csproj">
+      <Project>{5fe13609-816f-442d-85f0-3faad8e312d0}</Project>
+      <Name>ExceptionalWpfControls</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
